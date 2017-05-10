@@ -1,6 +1,7 @@
 package home.liqi.calendar;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -119,6 +120,22 @@ public class NewCalendar extends LinearLayout{
 
             int day = date.getDate();
             ((TextView)convertView).setText(String.valueOf(day));
+
+            Date now = new Date();
+            boolean isTheSameMonth = false;
+            if(date.getMonth() == now.getMonth()){
+                isTheSameMonth = true;
+            }
+
+            if(isTheSameMonth){
+                ((TextView)convertView).setTextColor(Color.parseColor("#000000"));
+            }else {
+                ((TextView)convertView).setTextColor(Color.parseColor("#666666"));
+            }
+            if(now.getDate() == date.getDate() && now.getMonth() == date.getMonth() && now.getYear() == date.getYear()){
+                ((Calendar_day_textView)convertView).setTextColor(Color.parseColor("#ff0000"));
+                ((Calendar_day_textView)convertView).isToday = true;
+            }
             return convertView;
         }
     }
