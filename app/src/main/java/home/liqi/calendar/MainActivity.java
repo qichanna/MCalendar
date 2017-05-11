@@ -2,12 +2,25 @@ package home.liqi.calendar;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class MainActivity extends AppCompatActivity implements NewCalendar.NewCalendarListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        NewCalendar calendar = (NewCalendar) findViewById(R.id.newCalendar);
+        calendar.listener = this;
+    }
+
+    @Override
+    public void OnItemLongPress(Date day) {
+        DateFormat df = SimpleDateFormat.getDateInstance();
+        Toast.makeText(MainActivity.this,df.format(day),500).show();
     }
 }
